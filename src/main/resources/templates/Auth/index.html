@@ -14,7 +14,7 @@
                 <img th:src="${school.url_logo}" th:if="${schools != null}" alt="Logo" />
                 <h1 th:text="${school.getName}">Mon Etab</h1>
             </div>
-            <form method="" th:action="@{/Dashboard}">
+            <form method="post" th:action="@{/login}">
                 <div class="input-group">
                     <label for="username">Identifiant</label>
                     <input type="text" id="username" name="username" required>

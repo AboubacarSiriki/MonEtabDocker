@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="Fragments/fragment::head">
+
+</head>
+<body>
+
+<div class="sidebar"  th:insert="Fragments/fragment::sidebar">
+
+</div>
+
+<div class="content">
+    <div class="back-button" style="justify-content: flex-end;" >
+    </div>
+
+    <form class="form-container" th:object="${schools}" th:action="@{/AddSchool}" method="post" enctype="multipart/form-data">
+        <h1>Modification des paramétrages de l'école</h1>
+
+        <input th:field="*{id}" hidden type="text">
+
+        <div class="form-group">
+            <label for="nom">Nom de l'école</label>
+            <input type="text" id="nom" name="nom" th:field="*{name}">
+        </div>
+
+        <div class="form-group">
+            <label for="url_logo">URL logo</label>
+            <input type="text" id="url_logo" name="url_logo" th:field="*{url_logo}">
+        </div>
+
+        <div class="form-group">
+            <label for="file">Télécharger un nouveau logo</label>
+            <input type="file" id="file" name="file" th:field="*{file}">
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-cancel" onclick="confirmCancel()"><a th:href="@{/Dashboard}">Annuler</a></button>
+            <button class="btn-save" type="submit">Enregistrer</button>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

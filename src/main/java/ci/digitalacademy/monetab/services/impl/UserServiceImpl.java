@@ -6,6 +6,8 @@ import ci.digitalacademy.monetab.repositories.UserRepository;
 import ci.digitalacademy.monetab.services.UserService;
 import ci.digitalacademy.monetab.services.dto.UserDTO;
 import ci.digitalacademy.monetab.services.mapper.UserMapper;
+import ci.digitalacademy.monetab.services.mapping.TeacherMapping;
+import ci.digitalacademy.monetab.services.mapping.UserMapping;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -65,6 +67,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDTO update(UserDTO userDTO, Long id) {
+        userDTO.setId(id);
+        return update(userDTO);
+    }
+
+    @Override
     public Optional<UserDTO> findOne(Long id) {
         return userRepository.findById(id).map(user -> {
             return userMapper.toDto(user);
@@ -108,6 +116,13 @@ public class UserServiceImpl implements UserService {
                 userMapper.toDto(user));
     }
 
+    @Override
+    public UserDTO partialUpdate(UserDTO userDTO, Long id) {
+        return userRepository.findById(id).map(user -> {
+            UserMapping.partialUpdate(user, userDTO);
+            return user;
+        }).map(userRepository::save).map(userMapper::toDto).orElse(null);
+    }
 
 
 }

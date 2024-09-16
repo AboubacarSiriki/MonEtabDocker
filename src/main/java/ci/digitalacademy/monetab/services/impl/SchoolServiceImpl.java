@@ -42,7 +42,9 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public Optional<SchoolDTO> findOne(Long id) {
-        return Optional.empty();
+        return schoolRepository.findById(id).map(school -> {
+            return schoolMapper.toDto(school);
+        });
     }
 
     @Override

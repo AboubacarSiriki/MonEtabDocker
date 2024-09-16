@@ -14,8 +14,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,26 +25,25 @@ public class DomainUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findBySpeudo(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
 
-       final Optional<User> user = userRepository.findBySpeudo(username);
+        // Vérifiez si l'utilisateur est désactivé
+        if (!user.isActive()) {
+            throw new UsernameNotFoundException("L'utilisateur est désactivé et ne peut pas se connecter.");
+        }
 
-       if (user.isEmpty()){
-           throw new IllegalArgumentException("User not found");
-       }
+        List<GrantedAuthority> grantedAuthorities = user.getRoleUsers()
+                .stream()
+                .map(RoleUser::getRole)
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
 
-       final List<GrantedAuthority> grantedAuthorities= user.get()
-               .getRoleUsers()
-               .stream()
-               .map(RoleUser::getRole)
-               .map(SimpleGrantedAuthority::new)
-               .collect(Collectors.toList());
-
-
-        return user.map(userRecover ->  org.springframework.security.core.userdetails.User.builder()
-                .username(userRecover.getSpeudo())
-                .password(userRecover.getPassword())
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(user.getSpeudo())
+                .password(user.getPassword())
                 .authorities(grantedAuthorities)
-                .roles()
-                .build()).orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .build();
     }
+
 }

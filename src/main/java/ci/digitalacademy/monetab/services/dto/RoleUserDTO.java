@@ -13,5 +13,7 @@ public class RoleUserDTO {
 
     private String role;
 
-    private User user;
+    private String slug ;
+
+    private UserDTO user;
 }

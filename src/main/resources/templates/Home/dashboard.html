@@ -13,6 +13,9 @@
     <div class="content">
         <div class="back-button" style="justify-content: flex-start;" >
             <h1 style="color:black;">Tableau de bord</h1>
+            <div th:if="${message}" class="alert alert-success">
+                <p th:text="${message}"></p>
+            </div>
         </div>
         <div class="card-container">
             <div class="card">Nombre d'élèves<br>128 100</div>
@@ -25,6 +28,6 @@
     </div>
 
     <!-- Insertion du fragment script -->
-    <th:block th:insert="fragments/fragment::script"></th:block>
+    <th:block th:insert="Fragments/fragment::script"></th:block>
 </body>
 </html>

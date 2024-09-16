@@ -1,10 +1,6 @@
 package ci.digitalacademy.monetab.services.dto;
 
 
-import ci.digitalacademy.monetab.models.Address;
-import ci.digitalacademy.monetab.models.RoleUser;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,14 +17,15 @@ public class UserDTO {
 
     private String password;
 
+    private boolean active;
+
     private Instant creationdate;
 
     private AddressDTO adresseDTO;
 
     private SchoolDTO schoolDTO;
 
-    private Set<AddressDTO> addressDTOS;
+    private String slug;
 
-    private Set<RoleUserDTO> roleUserDTOS;
 
 }

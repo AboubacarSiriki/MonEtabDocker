@@ -21,6 +21,8 @@ public class RoleUser implements Serializable {
     @Column(name = "role")
     private String role;
 
+    @Column(name = "slug",unique = true)
+    private String slug ;
 
     @ManyToOne(fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
     @JoinColumn(name ="user_id")

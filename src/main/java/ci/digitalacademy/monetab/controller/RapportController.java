@@ -1,14 +1,8 @@
 package ci.digitalacademy.monetab.controller;
 
 
-import ci.digitalacademy.monetab.services.SchoolService;
-import ci.digitalacademy.monetab.services.StudentService;
-import ci.digitalacademy.monetab.services.TeacherService;
-import ci.digitalacademy.monetab.services.UserService;
-import ci.digitalacademy.monetab.services.dto.SchoolDTO;
-import ci.digitalacademy.monetab.services.dto.StudentDTO;
-import ci.digitalacademy.monetab.services.dto.TeacherDTO;
-import ci.digitalacademy.monetab.services.dto.UserDTO;
+import ci.digitalacademy.monetab.services.*;
+import ci.digitalacademy.monetab.services.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -41,11 +35,16 @@ public class RapportController {
     private  final TeacherService teacherService;
     private final UserService userService;
 
+    private final AppSettingService appSettingService;
+
     @GetMapping
     public String showRapport(Model model){
 
         List<SchoolDTO> schoolDTOS = schoolService.findAll();
-        model.addAttribute("schools",schoolDTOS);
+        List<AppSettingDTO> appSettings = appSettingService.findAll();
+
+        model.addAttribute("schools", schoolDTOS);
+        model.addAttribute("appsettings", appSettings.isEmpty() ? null : appSettings.get(0));
         return "/Rapport/rapport";
     }
 
@@ -76,13 +75,13 @@ public class RapportController {
             List<StudentDTO> studentDTOS = studentService.findAll();
             document.add(new Paragraph("Listes des élèves"));
             for (StudentDTO student : studentDTOS) {
-                document.add(new Paragraph(student.getNom() + " - " + student.getEmail()));
+                document.add(new Paragraph(student.getNom() + " - " + student.getPrenom() + " - " + student.getTelephone() + " - " + student.getEmail()));
             }
         } else if ("teachers".equalsIgnoreCase(option)) {
             List<TeacherDTO> teacherDTOS = teacherService.findAll();
             document.add(new Paragraph("Listes des professeurs"));
             for (TeacherDTO teacher : teacherDTOS) {
-                document.add(new Paragraph(teacher.getNom() + " - " + teacher.getEmail()));
+                document.add(new Paragraph(teacher.getNom() + " - " + teacher.getPrenom() + " - " + teacher.getTelephone() + " - " + teacher.getEmail()));
             }
         } else if ("users".equalsIgnoreCase(option)) {
             List<UserDTO> userDTOS = userService.findAll();

@@ -24,6 +24,9 @@ public class User {
     @Column(name ="password",nullable = false)
     private String password;
 
+    @Column(name = "active", nullable = false)
+    private boolean active;
+
     @Column(name = "create_date",nullable = false)
     private Instant creationdate;
 
@@ -32,6 +35,9 @@ public class User {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy ="user")
     private Set<Address> addresses;
+
+    @Column(name = "slug",unique = true)
+    private String slug ;
 
     @ManyToOne(fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
     @JoinColumn(name ="school_id")

@@ -25,6 +25,9 @@ public class Absence implements Serializable {
     @Column(name = "absence_number")
     private int absence_number;
 
+    @Column(name = "slug",unique = true)
+    private String slug ;
+
     @ManyToOne(fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
     @JoinColumn(name ="student_id")
     private Student student;

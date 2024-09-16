@@ -40,7 +40,9 @@ public class AppSettingServiceImpl implements AppSettingService {
 
     @Override
     public Optional<AppSettingDTO> findOne(Long id) {
-        return Optional.empty();
+        return appSettingRepository.findById(id).map(appSetting -> {
+            return appSettingMapper.toDto(appSetting);
+        });
     }
 
     @Override

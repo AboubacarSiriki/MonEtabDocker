@@ -89,11 +89,25 @@ body {
     background-color: #e0e0e0;
     padding: 20px;
     height: 100vh;
-    border-right: 4px solid #a39d9d ;
+}
+
+.school-header {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espace entre l'image et le texte */
+}
+
+.school-logo {
+    width: 40px; /* Taille adaptée de l'image */
+    height: auto; /* Pour garder les proportions */
+    max-width: 100%; /* Empêche l'image de dépasser la taille */
+    border-radius: 50%; /* Si vous souhaitez que l'image soit ronde */
 }
 
 .sidebar h2 {
-    text-align: center;
+    margin: 0;
+    text-align: left;
+    font-size: 18px; /* Ajuster la taille si nécessaire */
 }
 
 .sidebar ul {
@@ -107,7 +121,7 @@ body {
     font-size: 16px;
     display: flex;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
     cursor: pointer;
     transition: color 0.3s ease;
 }
@@ -136,7 +150,7 @@ body {
     font-size: 16px;
     display: flex;
     align-items: center; 
-    margin-top: 210px;
+    margin-top: 120px;
 }
 
 .deconnexion li a {
@@ -159,12 +173,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-left: 4px solid #a39d9d ;
 }
 
 .content1 {
     flex-grow: 1;
     padding: 20px;
     margin-top: 0px;
+    border-left: 4px solid #a39d9d ;
 }
 
 .card-container {

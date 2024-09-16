@@ -25,7 +25,4 @@ public class PersonnDTO {
 
     private String genre;
 
-    private StudentDTO studentDTO;
-
-    private TeacherDTO teacherDTO;
 }

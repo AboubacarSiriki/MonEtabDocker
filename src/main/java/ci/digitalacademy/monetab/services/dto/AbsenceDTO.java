@@ -16,5 +16,7 @@ public class AbsenceDTO {
 
     private int absence_number;
 
-    private StudentDTO studentDTO;
+    private String slug;
+
+    private StudentDTO student;
 }

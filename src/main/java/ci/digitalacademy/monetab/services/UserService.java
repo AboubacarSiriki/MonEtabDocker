@@ -1,5 +1,7 @@
 package ci.digitalacademy.monetab.services;
 
+import ci.digitalacademy.monetab.models.User;
+import ci.digitalacademy.monetab.services.dto.TeacherDTO;
 import ci.digitalacademy.monetab.services.dto.UserDTO;
 
 import java.time.Instant;
@@ -11,6 +13,8 @@ public interface UserService {
     UserDTO save(UserDTO userDTO);
 
     UserDTO update(UserDTO userDTO);
+
+    UserDTO update(UserDTO userDTO, Long id);
 
     Optional<UserDTO> findOne(Long id);
 
@@ -24,5 +28,5 @@ public interface UserService {
 
     Optional<UserDTO> findBySpeudo(String speudo);
 
-
+    UserDTO partialUpdate(UserDTO userDTO, Long id);
 }

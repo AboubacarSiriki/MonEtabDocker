@@ -1,11 +1,12 @@
 package ci.digitalacademy.monetab.services.impl;
 
 import ci.digitalacademy.monetab.models.Student;
-import ci.digitalacademy.monetab.models.enumeration.Gender;
 import ci.digitalacademy.monetab.repositories.StudentRepository;
 import ci.digitalacademy.monetab.services.StudentService;
 import ci.digitalacademy.monetab.services.dto.StudentDTO;
 import ci.digitalacademy.monetab.services.mapper.StudentMapper;
+import ci.digitalacademy.monetab.services.mapping.StudentMapping;
+import ci.digitalacademy.monetab.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,8 @@ public class StudentServiceImpl implements StudentService {
     public StudentDTO save(StudentDTO studentDTO) {
         log.debug("Resqurst to save : {}",studentDTO);
         Student student = studentMapper.toEntity(studentDTO);
+        String slug = SlugifyUtils.generated(student.getNom().toString());
+        student.setSlug(slug);
         student= studentRepository.save(student);
 
         return  studentMapper.toDto(student);
@@ -54,6 +57,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public StudentDTO update(StudentDTO studentDTO, Long id) {
+        studentDTO.setId(id);
+        return update(studentDTO);
+    }
+
+    @Override
     public void delecte(Long id) {
 
         studentRepository.deleteById(id);
@@ -64,5 +73,14 @@ public class StudentServiceImpl implements StudentService {
         List<Student> students = studentRepository.findByNomIgnoreCaseOrMatriculeIgnoreCaseAndGenre(query  , query ,genre);
         return students.stream().map(student -> studentMapper.toDto(student)).toList();
     }
+
+    @Override
+    public StudentDTO partialUpdate(StudentDTO studentDTO, Long id) {
+        return studentRepository.findById(id).map(student -> {
+            StudentMapping.partialUpdate(student, studentDTO);
+            return student;
+        }).map(studentRepository::save).map(studentMapper::toDto).orElse(null);
+    }
+
 }
 

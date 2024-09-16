@@ -1,6 +1,7 @@
 package ci.digitalacademy.monetab.services.impl;
 
 import ci.digitalacademy.monetab.models.RoleUser;
+import ci.digitalacademy.monetab.models.Student;
 import ci.digitalacademy.monetab.repositories.RoleUserRepository;
 import ci.digitalacademy.monetab.services.RoleUserService;
 import ci.digitalacademy.monetab.services.dto.RoleUserDTO;
@@ -31,12 +32,22 @@ public class RoleUserServiceImpl implements RoleUserService {
 
     @Override
     public RoleUserDTO update(RoleUserDTO roleUserDTO) {
-        return null;
+        RoleUser roleUser = roleUserMapper.toEntity(roleUserDTO);
+        roleUser = roleUserRepository.save(roleUser);
+        return roleUserMapper.toDto(roleUser);
     }
 
     @Override
     public Optional<RoleUserDTO> findOne(Long id) {
-        return Optional.empty();
+        return roleUserRepository.findById(id).map(roleUser -> {
+            return roleUserMapper.toDto(roleUser);
+        });
+    }
+
+    @Override
+    public RoleUserDTO update(RoleUserDTO roleUserDTO, Long id) {
+        roleUserDTO.setId(id);
+        return update(roleUserDTO);
     }
 
     @Override
@@ -63,5 +74,10 @@ public class RoleUserServiceImpl implements RoleUserService {
     @Override
     public void delete(Long id) {
 
+    }
+
+    @Override
+    public RoleUserDTO partialUpdate(RoleUserDTO roleUserDTO, Long id) {
+        return null;
     }
 }

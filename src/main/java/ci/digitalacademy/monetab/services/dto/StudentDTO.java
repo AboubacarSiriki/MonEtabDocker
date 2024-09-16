@@ -3,6 +3,7 @@ package ci.digitalacademy.monetab.services.dto;
 import ci.digitalacademy.monetab.models.Absence;
 import ci.digitalacademy.monetab.models.Person;
 import ci.digitalacademy.monetab.models.StudentCards;
+import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -25,11 +26,7 @@ public class StudentDTO extends PersonnDTO {
 
     private Integer age;
 
-    private Set<AbsenceDTO> absenceDTOS;
-
-    private StudentCardsDTO studentCardsDTO;
-
-    private PersonnDTO personnDTO;
+    private String slug ;
 
     public void setDatenaiss(LocalDate datenaiss) {
         this.datenaiss = datenaiss;

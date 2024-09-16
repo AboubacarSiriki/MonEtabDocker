@@ -7,36 +7,68 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
-<div class="sidebar" th:fragment="sidebar">
-    <h2 th:text="${school.getName}" th:each="school:${schools}" >Mon Etab</h2>
+<div class="sidebar" th:fragment="sidebar" th:each="school : ${schools}">
+    <div class="school-header">
+        <img th:src="${school.url_logo}" alt="Logo" class="school-logo">
+        <h2 th:text="${school.getName}">Mon Etab</h2>
+    </div>
     <hr>
     <ul>
         <li class="active">
-            <a th:href="@{/Dashboard}"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a>
+            <a th:href="@{/Dashboard}">
+                <i class="fas fa-tachometer-alt"></i> Tableau de bord
+            </a>
         </li>
         <li>
-            <a th:href="@{/Students}"><i class="fas fa-user-graduate"></i> Élèves</a>
+            <a th:href="@{/Students}">
+                <i class="fas fa-user-graduate"></i> Élèves
+            </a>
         </li>
         <li>
-            <a th:href="@{/Teachers}"><i class="fas fa-chalkboard-teacher"></i> Professeurs</a>
+            <a th:href="@{/Teachers}">
+                <i class="fas fa-chalkboard-teacher"></i> Professeurs
+            </a>
         </li>
         <li>
-            <a th:href="@{/Users}"><i class="fas fa-user"></i> Utilisateur</a>
+            <a th:href="@{/Users}">
+                <i class="fas fa-user"></i> Utilisateurs
+            </a>
         </li>
         <li>
-            <a th:href="@{/Rapport}"><i class="fas fa-chart-line"></i>Rapport</a>
+            <a th:href="@{/Rapport}">
+                <i class="fas fa-chart-line"></i> Rapport
+            </a>
+        </li>
+
+        <!-- Itération sur appsettings pour afficher chaque paramètre -->
+        <li th:each="appsetting : ${appsettings}" th:if="${appsetting != null}">
+            <a th:href="@{/Dashboard/updateAppSetting/{id}(id=${appsetting.getId})}">
+                <i class="fas fa-cog"></i> Paramètres de l'application
+            </a>
+        </li>
+
+        <li th:if="${school != null}">
+            <a th:href="@{/AddSchool/updateSchool/{id}(id=${school.getId})}">
+                <i class="fas fa-school"></i> Paramètres de l'école
+            </a>
         </li>
         <li>
-            <a href=""><i class="fas fa-chart-line"></i>App Setting</a>
+            <a th:href="@{/swagger-ui/index.html}">
+                <i class="fas fa-school"></i> Documentation Swagger
+            </a>
+        </li>
+        <li>
+            <a href="https://documenter.getpostman.com/view/38214536/2sAXqp8Nvz">
+                <i class="fas fa-school"></i> Documentation Postman
+            </a>
         </li>
     </ul>
-    <hr style="margin-top:270px;">
+    <hr style="margin-top:110px;">
     <ul>
         <li>
-            <a th:href="@{/}">
+            <a th:href="@{/logout}">
                 <i class="fas fa-sign-out-alt"></i> Déconnexion
             </a>
-
         </li>
     </ul>
 </div>

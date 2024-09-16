@@ -1,23 +1,17 @@
 package ci.digitalacademy.monetab;
 
-import ci.digitalacademy.monetab.models.*;
+
 import ci.digitalacademy.monetab.services.*;
-import ci.digitalacademy.monetab.services.dto.AppSettingDTO;
-import ci.digitalacademy.monetab.services.dto.RoleUserDTO;
-import ci.digitalacademy.monetab.services.dto.SchoolDTO;
-import ci.digitalacademy.monetab.services.dto.UserDTO;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.time.Instant;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
+@RequiredArgsConstructor
 public class MonetabApplication implements CommandLineRunner {
 
 	@Autowired
@@ -43,6 +37,8 @@ public class MonetabApplication implements CommandLineRunner {
 
 	@Autowired
 	private RoleUserService roleUserService;
+
+	private final BCryptPasswordEncoder passwordEncoder;
 
 
 	public static void main(String[] args) {
@@ -154,15 +150,15 @@ public class MonetabApplication implements CommandLineRunner {
 //		List<FicheNote> ficheNotes = ficheService.findAll();
 //		System.out.println(ficheNotes);
 
-		RoleUserDTO role1 = new RoleUserDTO();
-		role1.setRole("admin");
-		RoleUserDTO role2 = new RoleUserDTO();
-		role2.setRole("staff");
-		RoleUserDTO role3 = new RoleUserDTO();
-		role3.setRole("other");
-
-		List<RoleUserDTO> roleUsersDTO = Arrays.asList(role1, role2, role3);
-		roleUsersDTO = roleUserService.initRoles(roleUsersDTO);
+//		RoleUserDTO role1 = new RoleUserDTO();
+//		role1.setRole("admin");
+//		RoleUserDTO role2 = new RoleUserDTO();
+//		role2.setRole("staff");
+//		RoleUserDTO role3 = new RoleUserDTO();
+//		role3.setRole("other");
+//
+//		List<RoleUserDTO> roleUsersDTO = Arrays.asList(role1, role2, role3);
+//		roleUsersDTO = roleUserService.initRoles(roleUsersDTO);
 
 //		AppSettingDTO appSettingDTO = new AppSettingDTO();
 //
@@ -179,36 +175,40 @@ public class MonetabApplication implements CommandLineRunner {
 //		schoolDTO.setAppSettingDTO(settingDTO);
 //		schoolDTO = schoolService.initSchool(schoolDTO);
 
-		Set<RoleUserDTO> roleUserAnge = new HashSet<>();
-		roleUserAnge.add(roleUsersDTO.get(0));
+//		Set<RoleUserDTO> roleUserAnge = new HashSet<>();
+//		roleUserAnge.add(roleUsersDTO.get(0));
+//
+//		Set<RoleUserDTO> roleUserStaff = new HashSet<>();
+//		roleUserStaff.add(roleUsersDTO.get(1));
+//
+//		Set<RoleUserDTO> roleUserOther = new HashSet<>();
+//		roleUserOther.add(roleUsersDTO.get(2));
+//
+//		UserDTO ange = new UserDTO();
+//		ange.setSpeudo("admin");
+//		String password = passwordEncoder.encode("admin");
+//		ange.setCreationdate(Instant.now());
+//		ange.setPassword(password);
+//		ange.setActive(true);
+//		ange.setRoleUserDTOS(roleUserAnge);
+//
+//
+//		UserDTO staff = new UserDTO();
+//		staff.setSpeudo("user");
+//		String password1 = passwordEncoder.encode("user");
+//		staff.setPassword(password1);
+//		staff.setActive(true);
+//		staff.setCreationdate(Instant.now());
+//     	staff.setRoleUserDTOS(roleUserStaff);
+//
+//		UserDTO other = new UserDTO();
+//		other.setSpeudo("bakus");
+//		other.setPassword("bakus005");
+//		other.setCreationdate(Instant.now());
+//		other.setRoleUserDTOS(roleUserOther);
 
-		Set<RoleUserDTO> roleUserStaff = new HashSet<>();
-		roleUserStaff.add(roleUsersDTO.get(1));
-
-		Set<RoleUserDTO> roleUserOther = new HashSet<>();
-		roleUserOther.add(roleUsersDTO.get(2));
-
-		UserDTO ange = new UserDTO();
-		ange.setSpeudo("angeB");
-		ange.setPassword("angeB123");
-		ange.setCreationdate(Instant.now());
-		ange.setRoleUserDTOS(roleUserAnge);
-
-		UserDTO staff = new UserDTO();
-		staff.setSpeudo("delmas");
-		staff.setPassword("delmas007");
-		staff.setCreationdate(Instant.now());
-
-		staff.setRoleUserDTOS(roleUserStaff);
-
-		UserDTO other = new UserDTO();
-		other.setSpeudo("bakus");
-		other.setPassword("bakus005");
-		other.setCreationdate(Instant.now());
-		other.setRoleUserDTOS(roleUserOther);
-
-		List<UserDTO> users = List.of(ange, staff, other);
-		userService.initUser(users);
+//		List<UserDTO> users = List.of(ange,staff);
+//		userService.initUser(users);
 
 
 	}

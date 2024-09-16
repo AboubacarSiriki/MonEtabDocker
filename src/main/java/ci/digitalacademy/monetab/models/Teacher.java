@@ -19,6 +19,8 @@ public class Teacher extends Person {
     @Column(name = "vacant", nullable = false)
     private Boolean vacant;
 
+    @Column(name = "slug",unique = true)
+    private String slug ;
 
     @OneToOne
     private Person person;

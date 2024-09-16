@@ -15,7 +15,11 @@ public interface StudentService {
 
     List<StudentDTO> findAll();
 
+    StudentDTO update(StudentDTO studentDTO, Long id);
+
     void delecte(Long id);
 
     List<StudentDTO> findByNomOrGenreOrMatricule(String query , String genre);
+
+    StudentDTO partialUpdate(StudentDTO studentDTO, Long id);
 }

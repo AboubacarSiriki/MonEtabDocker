@@ -35,6 +35,9 @@ public class Student extends Person {
     @OneToMany(fetch = FetchType.EAGER, mappedBy ="student")
     private Set<Absence> absences;
 
+    @Column(name = "slug",unique = true)
+    private String slug ;
+
     @OneToOne
     private StudentCards studentCards;
 

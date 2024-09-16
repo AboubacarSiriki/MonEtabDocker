@@ -13,6 +13,8 @@ public interface TeacherService {
 
     TeacherDTO update(TeacherDTO teacherDTO);
 
+    TeacherDTO update(TeacherDTO teacherDTO, Long id);
+
     Optional<TeacherDTO> findOne(Long id);
 
     List<TeacherDTO> findAll();
@@ -20,4 +22,6 @@ public interface TeacherService {
     void delecte(Long id);
 
     List<TeacherDTO> findByNomOrMatiereAndGenre(String query , String genre);
+
+    TeacherDTO partialUpdate(TeacherDTO teacherDTO, Long id);
 }

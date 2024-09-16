@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="fr"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="Fragments/fragment::head">
+
 </head>
+
 <body>
 
+<div class="sidebar"  th:insert="Fragments/fragment::sidebar">
+
+</div>
+
+<div class="content">
+    <div class="back-button" style="justify-content: flex-end;" >
+    </div>
+
+    <form class="form-container"  th:object="${appsetting}" th:action="@{/Dashboard}" method="post">
+
+        <h1 >Modification des paramettrages SMTP</h1>
+
+        <div th:if="${message}" class="alert alert-success">
+            <p th:text="${message}"></p>
+        </div>
+
+        <input th:field="*{id}" hidden type="text">
+
+        <div class="form-group">
+            <label for="password">Smtp password</label>
+            <input type="password" id="password" name="password" th:field="*{smtpPassword}">
+        </div>
+
+        <div class="form-group">
+            <label for="port">Smtp port</label>
+            <input  type="number" id="port" name="port" th:field="*{smtpPort}">
+        </div>
+
+        <div class="form-group">
+            <label for="smtpServer">Smtp Server</label>
+            <input  type="text" id="smtpServer" name="smtpServer" th:field="*{smtpServer}">
+        </div>
+
+        <div class="form-group">
+            <label for="SmtpUsrName">Smtp Usr Name</label>
+            <input  type="text" id="SmtpUsrName" name="SmtpUsrName" th:field="*{smtpUserName}">
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-cancel" onclick="confirmCancel()"><a th:href="@{/Dashboard}">Annuler</a></button>
+            <button class="btn-save" type="submit">Enregistrer</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>
