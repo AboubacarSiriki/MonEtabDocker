@@ -12,9 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
+//import com.itextpdf.kernel.pdf.PdfWriter;
+//import com.itextpdf.layout.Document;
+//import com.itextpdf.layout.element.Paragraph;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -51,47 +51,48 @@ public class RapportController {
 
     @GetMapping("/download")
     public ResponseEntity<byte[]> downloadRapport(String option, String format) throws Exception {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-        if ("pdf".equalsIgnoreCase(format)) {
-            generatePdf(option, outputStream);
-        } else if ("xlsx".equalsIgnoreCase(format)) {
-            generateExcel(option, outputStream);
-        }
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=rapport." + format);
-        headers.setContentType("pdf".equalsIgnoreCase(format) ? MediaType.APPLICATION_PDF : MediaType.APPLICATION_OCTET_STREAM);
-
-        return ResponseEntity.ok().headers(headers).body(outputStream.toByteArray());
+//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//
+//        if ("pdf".equalsIgnoreCase(format)) {
+//            generatePdf(option, outputStream);
+//        } else if ("xlsx".equalsIgnoreCase(format)) {
+//            generateExcel(option, outputStream);
+//        }
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=rapport." + format);
+//        headers.setContentType("pdf".equalsIgnoreCase(format) ? MediaType.APPLICATION_PDF : MediaType.APPLICATION_OCTET_STREAM);
+//
+//        return ResponseEntity.ok().headers(headers).body(outputStream.toByteArray());
+        return null;
     }
 
     private void generatePdf(String option, ByteArrayOutputStream outputStream) throws Exception {
-        PdfWriter writer = new PdfWriter(outputStream);
-        com.itextpdf.kernel.pdf.PdfDocument pdfDoc = new com.itextpdf.kernel.pdf.PdfDocument(writer);
-        Document document = new Document(pdfDoc);
-
-        if ("students".equalsIgnoreCase(option)) {
-            List<StudentDTO> studentDTOS = studentService.findAll();
-            document.add(new Paragraph("Listes des élèves"));
-            for (StudentDTO student : studentDTOS) {
-                document.add(new Paragraph(student.getNom() + " - " + student.getPrenom() + " - " + student.getTelephone() + " - " + student.getEmail()));
-            }
-        } else if ("teachers".equalsIgnoreCase(option)) {
-            List<TeacherDTO> teacherDTOS = teacherService.findAll();
-            document.add(new Paragraph("Listes des professeurs"));
-            for (TeacherDTO teacher : teacherDTOS) {
-                document.add(new Paragraph(teacher.getNom() + " - " + teacher.getPrenom() + " - " + teacher.getTelephone() + " - " + teacher.getEmail()));
-            }
-        } else if ("users".equalsIgnoreCase(option)) {
-            List<UserDTO> userDTOS = userService.findAll();
-            document.add(new Paragraph("Listes des utilisateurs"));
-            for (UserDTO user : userDTOS) {
-                document.add(new Paragraph(user.getSpeudo() + " - " + user.getCreationdate()));
-            }
-        }
-
-        document.close();
+//        PdfWriter writer = new PdfWriter(outputStream);
+//        com.itextpdf.kernel.pdf.PdfDocument pdfDoc = new com.itextpdf.kernel.pdf.PdfDocument(writer);
+//        Document document = new Document(pdfDoc);
+//
+//        if ("students".equalsIgnoreCase(option)) {
+//            List<StudentDTO> studentDTOS = studentService.findAll();
+//            document.add(new Paragraph("Listes des élèves"));
+//            for (StudentDTO student : studentDTOS) {
+//                document.add(new Paragraph(student.getNom() + " - " + student.getPrenom() + " - " + student.getTelephone() + " - " + student.getEmail()));
+//            }
+//        } else if ("teachers".equalsIgnoreCase(option)) {
+//            List<TeacherDTO> teacherDTOS = teacherService.findAll();
+//            document.add(new Paragraph("Listes des professeurs"));
+//            for (TeacherDTO teacher : teacherDTOS) {
+//                document.add(new Paragraph(teacher.getNom() + " - " + teacher.getPrenom() + " - " + teacher.getTelephone() + " - " + teacher.getEmail()));
+//            }
+//        } else if ("users".equalsIgnoreCase(option)) {
+//            List<UserDTO> userDTOS = userService.findAll();
+//            document.add(new Paragraph("Listes des utilisateurs"));
+//            for (UserDTO user : userDTOS) {
+//                document.add(new Paragraph(user.getSpeudo() + " - " + user.getCreationdate()));
+//            }
+//        }
+//
+//        document.close();
     }
 
 

@@ -33,9 +33,6 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, mappedBy ="user")
     private Set<RoleUser> roleUsers;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy ="user")
-    private Set<Address> addresses;
-
     @Column(name = "slug",unique = true)
     private String slug ;
 

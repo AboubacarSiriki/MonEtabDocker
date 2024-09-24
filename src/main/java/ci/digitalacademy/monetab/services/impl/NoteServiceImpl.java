@@ -3,6 +3,7 @@ package ci.digitalacademy.monetab.services.impl;
 import ci.digitalacademy.monetab.repositories.NoteRepository;
 import ci.digitalacademy.monetab.services.NoteService;
 import ci.digitalacademy.monetab.services.dto.NoteDTO;
+import ci.digitalacademy.monetab.services.mapper.NoteMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class NoteServiceImpl implements NoteService {
 
     private final NoteRepository noteRepository;
 
+    private final NoteMapper noteMapper;
+
 
     @Override
     public NoteDTO save(NoteDTO noteDTO) {
@@ -30,7 +33,9 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public Optional<NoteDTO> findOne(Long id) {
-        return Optional.empty();
+        return noteRepository.findById(id).map(note -> {
+            return noteMapper.toDto(note);
+        });
     }
 
     @Override

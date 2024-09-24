@@ -1,5 +1,6 @@
 package ci.digitalacademy.monetab.models;
 
+import ci.digitalacademy.monetab.services.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,7 +26,4 @@ public class Address {
     @Column(name = "street")
     private String street;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name ="user_id")
-    private User user;
 }

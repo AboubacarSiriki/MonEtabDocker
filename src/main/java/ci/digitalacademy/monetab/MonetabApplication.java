@@ -210,6 +210,5 @@ public class MonetabApplication implements CommandLineRunner {
 //		List<UserDTO> users = List.of(ange,staff);
 //		userService.initUser(users);
 
-
 	}
 }

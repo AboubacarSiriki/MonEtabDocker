@@ -1,6 +1,7 @@
 package ci.digitalacademy.monetab.services.dto;
 
 
+import ci.digitalacademy.monetab.models.RoleUser;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,11 +22,11 @@ public class UserDTO {
 
     private Instant creationdate;
 
-    private AddressDTO adresseDTO;
-
     private SchoolDTO schoolDTO;
 
     private String slug;
+
+    private Set<RoleUserDTO> roleUserDTOS;
 
 
 }

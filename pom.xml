@@ -100,11 +100,11 @@
 			<version>5.2.2</version>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>itext7-core</artifactId>
 			<version>7.2.3</version>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -146,6 +146,10 @@
 			<version>3.0.7</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+		</dependency>
 
 	</dependencies>
 
@@ -191,6 +195,19 @@
 			</annotationProcessorPaths>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.3</version>
+				<configuration>
+					<to>
+						<image>aboubacarsidik/monetab:${version}</image>
+					</to>
+				</configuration>
+			</plugin>
+
+
 		</plugins>
 	</build>
 
