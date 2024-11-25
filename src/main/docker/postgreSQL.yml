@@ -1,0 +1,11 @@
+version: "3.0"
+
+services:
+  monetab : postgres:13-alpine
+  environnement:
+    - POSTGRES_USER=soum
+    - POSTGRES_PASSWORD=soum
+    - POSTGRES_DB=Monetab
+  ports:
+    - 127.0.0.1:5432:5432
+
